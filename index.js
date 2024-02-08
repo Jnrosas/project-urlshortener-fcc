@@ -1,7 +1,10 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config({ path: '../sample.env' });
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -18,11 +21,8 @@ app.get('/', function(req, res) {
 app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
-
 // URL Shortener Microservice
-const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));  
-const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const urlSchema = new mongoose.Schema({
   original_url: { type: String, required: true },
