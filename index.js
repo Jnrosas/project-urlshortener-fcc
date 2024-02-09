@@ -41,7 +41,7 @@ const urlSchema = new mongoose.Schema({
 let Url = mongoose.model('Url', urlSchema);
 
 // Post request and clicking the link will retrieve the url and the short url as an object
-let urlCounter = 1000; // Initiates the urlCounter
+let urlCounter = 0; // Initiates the urlCounter
 app.post('/api/shorturl', async (req, res) => {
   let originalUrl = req.body.url;
   const urlRegex = /^(http|https):\/\/[^ "]+$/;
